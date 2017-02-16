@@ -7,10 +7,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class TournamentPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(private navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TournamentPage');
+  }
+  navigation(){
+    this.navCtrl.pop();
   }
 
 }
