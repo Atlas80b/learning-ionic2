@@ -1,19 +1,39 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController, NavController, NavParams } from 'ionic-angular';
 
+//import { MyTeamsPage } from '../my-teams/my-teams';
+import { TeamsPage } from '../teams/teams';
+import { EliteApi } from '../../shared/shared';
+ 
 @Component({
   selector: 'page-tournament',
   templateUrl: 'tournament.html'
 })
 export class TournamentPage {
 
-  constructor(private navCtrl: NavController, public navParams: NavParams) {}
+  tournaments;
+  constructor(private navCtrl: NavController,
+              private navParams: NavParams,
+              private eliteApi: EliteApi,
+              private loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TournamentPage');
+    //console.log('ionViewDidLoad TournamentPage');
+    let loader = this.loadingCtrl.create({
+      spinner: 'dots',
+      //showBackdrop: true
+    });
+    loader.present().then(() =>{
+       this.eliteApi.getTournaments().subscribe( data => {
+         this.tournaments = data;
+         loader.dismiss();
+        });
+    });
+    //this.eliteApi.getTournaments().then(data => this.tournaments = data);
   }
-  navigation(){
-    this.navCtrl.pop();
+  
+  itemTapped($event, tourney){
+    this.navCtrl.push(TeamsPage, tourney);
   }
 
 }

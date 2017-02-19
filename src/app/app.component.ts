@@ -2,13 +2,16 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { MyTeamsPage } from '../pages/my-teams/my-teams';
+//import { TeamsPage } from '../pages/teams/teams';
 import { TournamentPage } from '../pages/tournament/tournament';
-import { TeamDetailPage } from '../pages/team-detail/team-detail';
-import { GamePage } from '../pages/game/game';
+//import { TeamDetailPage } from '../pages/team-detail/team-detail';
+//import { GamePage } from '../pages/game/game';
+//import { StandingsPage } from '../pages/standings/standings';
+//import { TeamHomePage } from '../pages/team-home/team-home';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -42,11 +45,11 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(page);
   }
 
   goToHome(){
-    this.nav.push(MyTeamsPage);
+    this.nav.popToRoot();
   }
 
   goToTournaments(){
