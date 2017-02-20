@@ -13,14 +13,16 @@ export class TeamDetailPage {
     games: any;
     team: any;
     private tourneyData: any;
+    teamStanding: any;
   constructor(private navCtrl: NavController, 
               private navParams: NavParams,
               private eliteApi: EliteApi ) {
+    this.team = this.navParams.data;
+    this.tourneyData = this.eliteApi.getCurrentTourney();
+    this.teamStanding = _.find(this.tourneyData.standings, {'teamId': this.team.id});
   }
 
   ionViewDidLoad() {
-    this.team = this.navParams.data;
-    this.tourneyData = this.eliteApi.getCurrentTourney();
       this.games = _.chain(this.tourneyData.games)
                     .filter(g=> (g.team1Id === this.team.id || g.team1Id === this.team.id))
                     .map(g=>{
